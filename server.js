@@ -46,4 +46,4 @@ app.get('/bad', (request, response) => {
 	});
 });
 
-app.listen(port, () => console.log(`Listening on port #{port});
+app.listen(port, () => console.log(`Listening on port ${port}`));
