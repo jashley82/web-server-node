@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -45,19 +46,4 @@ app.get('/bad', (request, response) => {
 	});
 });
 
-var server = app.listen(3000, () => console.log('Listening on http://localhost:3000'));
-var gracefulShutdown = () => {
-	console.log("Received kill signal, shutting down gracefully.");
-	server.close(() => {
-		console.log("Closed out remaining connections");
-		process.exit();
-	});
-
-	setTimeout(() => {
-		console.error("Could not close connections in time, forcefully shutting down");
-		process.exit();
-	}, 10 * 1000);
-};
-
-process.on('SIGTERM', gracefulShutdown);
-process.on('SIGINT', gracefulShutdown);
+app.listen(port, () => console.log(`Listening on port #{port});
